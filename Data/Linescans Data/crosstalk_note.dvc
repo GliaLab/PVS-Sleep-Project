@@ -1,0 +1,5 @@
+outs:
+- md5: ae3cd128725723fa14eb2d31b534ffe6.dir
+  size: 184
+  nfiles: 1
+  path: crosstalk_note

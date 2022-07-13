@@ -1,0 +1,5 @@
+outs:
+- md5: 13df59880415e58828d731dccd36c968.dir
+  size: 62008768
+  nfiles: 67
+  path: camera_rois

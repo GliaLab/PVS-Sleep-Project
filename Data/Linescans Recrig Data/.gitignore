@@ -1,0 +1,13 @@
+/ephys
+/path
+/start_time
+/duration
+/sleep_episodes
+/linescan
+/wheel
+/sleep_note
+/trial_type
+/trial_id
+/wakefulness_episodes
+/camera_rois
+/camera_traces

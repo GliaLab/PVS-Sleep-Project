@@ -1,0 +1,5 @@
+outs:
+- md5: 58cd38e245816dba6940ad8c376907a4.dir
+  size: 462720
+  nfiles: 120
+  path: vessels_green_threshold

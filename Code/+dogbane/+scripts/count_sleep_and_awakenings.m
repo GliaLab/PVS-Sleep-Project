@@ -1,0 +1,1 @@
+tbl_sleep_and_awakenings = dogbane.tables.states.count_sleep_and_awakenings(tm)

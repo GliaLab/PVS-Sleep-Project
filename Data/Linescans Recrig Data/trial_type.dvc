@@ -1,0 +1,5 @@
+outs:
+- md5: 102b55c621951155e72127fcbabd6da4.dir
+  size: 57600
+  nfiles: 300
+  path: trial_type

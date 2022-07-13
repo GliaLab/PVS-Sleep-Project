@@ -1,0 +1,5 @@
+outs:
+- md5: e503d15130ca4577cc9b1f7a10d3f7ad.dir
+  size: 55752
+  nfiles: 303
+  path: linescan_crop

@@ -1,0 +1,662 @@
+
+stages:
+  plot_diam_on_vessels:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diam_on_vessels');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_diam_on_vessels.m
+    - Code/Iris/+iris/+episodes/plot_episodes.m
+    - Code/Iris/+iris/+linescan/plot_vessel_dual_color.m
+    - Code/Iris/+iris/+time_series/plot_separate.m
+    - Data/Linescans Data/clean_episodes
+    - Data/Linescans Data/vessels_green
+    - Data/Linescans Data/vessels_red
+    - Data/Linescans Data/vessel_wall
+    outs:
+    - Plot/Linescan Vessel Images Figures
+
+  export_vessel_wall_subset_for_simulations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_wall_subset_for_simulations');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/export_vessel_wall_subset_for_simulations.m
+    - Plot/Vessel Wall CSV Clean + Awakening
+    - Plot/Lumen Vessel Wall CSV Awakening
+    outs:
+    - Plot/Vessel Wall CSV used in simulations
+
+  export_vessel_images:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_images');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/export_vessel_images.m
+    - Data/Linescans Data/clean_episodes
+    - Data/Linescans Data/vessels_green
+    - Data/Linescans Data/vessels_red
+    outs:
+    - Plot/Linescan Vessel Images
+
+  export_vessel_wall_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_wall_red');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/export_vessel_wall_red.m
+    - Data/Linescans Data/awakening_episodes
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/vessel_wall_red
+    outs:
+    - Plot/Lumen Vessel Wall CSV Awakening
+    - Plot/Lumen Vessel Wall CSV
+
+  export_vessel_wall:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_wall');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/export_vessel_wall.m
+    - Data/Linescans Data/clean_episodes
+    - Data/Linescans Data/awakening_episodes
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/vessel_wall
+    outs:
+    - Plot/Vessel Wall CSV Clean + Awakening
+    - Plot/Vessel Wall CSV
+
+  calc_vessel_wall_traces_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_vessel_wall_traces_red');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_vessel_wall_traces_red.m
+    - Data/Linescans Data/diameter_green
+    - Data/Linescans Data/diameter_red
+    - Data/Linescans Data/ignored_episodes_green
+    - Data/Linescans Data/ignored_episodes_red
+    outs:
+    - Data/Linescans Data/vessel_wall_red
+
+  calc_vessel_wall_traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_vessel_wall_traces');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_vessel_wall_traces.m
+    - Data/Linescans Data/diameter_green
+    - Data/Linescans Data/diameter_red
+    - Data/Linescans Data/ignored_episodes_green
+    - Data/Linescans Data/ignored_episodes_red
+    outs:
+    - Data/Linescans Data/vessel_wall
+
+  plot_aligned_dilations_core_trace:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_core_trace');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_aligned_dilations_core_trace.m
+    - Data/Linescans Data/core_trace_dilation
+    - Data/Linescans Data/core_trace_dilation_tbl
+    - Data/Linescans Data/diameter_dilation
+    - Data/Linescans Data/diameter_dilation_tbl
+    outs:
+    - Plot/Linescan dilations vessel center avg
+
+  align_dilations_core_trace:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_dilations_core_trace');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/align_dilations_core_trace.m
+    - Data/Linescans Data/core_trace
+    - Data/Linescans Data/dilation_timepoints
+    outs:
+    - Data/Linescans Data/core_trace_dilation
+    - Data/Linescans Data/core_trace_dilation_tbl
+
+  plot_vessel_core_traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_vessel_core_traces');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_vessel_core_traces.m
+    - Data/Linescans Data/core_trace
+    outs:
+    - Plot/Linescan vessel center traces
+
+  calc_vessel_core_traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_vessel_core_traces');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_vessel_core_traces.m
+    - Data/Linescans Data/vessels_green
+    outs:
+    - Data/Linescans Data/core_trace
+
+  Plot ECoG to dilations avg:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_eeg_avg');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_aligned_dilations_eeg_avg.m
+    - Data/Linescans Data/eeg_dilation
+    - Data/Linescans Data/eeg_dilation_tbl
+    - Data/Linescans Data/diameter_dilation
+    - Data/Linescans Data/diameter_dilation_tbl
+    outs:
+    - Plot/Linescan dilations ECoG avg
+
+  Plot ECoG to PVS:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_pvs_eeg');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_aligned_pvs_eeg.m
+    - Data/Linescans Data/trial_id
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/pvs_timepoints
+    - Data/Linescans Data/recrig
+    - Data/Linescans Recrig Data/ephys
+    - Data/Linescans Data/eeg_pvs
+    - Data/Linescans Data/eeg_pvs_tbl
+    outs:
+    - Plot/Linescan PVS timepoint per trial ECoG
+
+  Align ECoG to PVS:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_pvs_eeg');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/align_pvs_eeg.m
+    - Data/Linescans Data/pvs_timepoints
+    - Data/Linescans Data/recrig
+    - Data/Linescans Recrig Data/ephys
+    outs:
+    - Data/Linescans Data/eeg_pvs
+    - Data/Linescans Data/eeg_pvs_tbl
+
+  Plot diameter to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_diameter');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_aligned_dilations_diameter.m
+    - Data/Linescans Data/trial_id
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/dilation_timepoints
+    - Data/Linescans Data/diameter_dilation
+    - Data/Linescans Data/diameter_dilation_tbl
+    outs:
+    - Plot/Linescan dilations per trial diameter
+
+  Align diameter to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_dilations_diameter');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/align_dilations_diameter.m
+    - Data/Linescans Data/dilation_timepoints
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/diameter_peri_baseline
+    outs:
+    - Data/Linescans Data/diameter_dilation
+    - Data/Linescans Data/diameter_dilation_tbl
+
+  Plot ECoG to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_eeg');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_aligned_dilations_eeg.m
+    - Data/Linescans Data/trial_id
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/dilation_timepoints
+    - Data/Linescans Data/recrig
+    - Data/Linescans Recrig Data/ephys
+    - Data/Linescans Data/eeg_dilation
+    - Data/Linescans Data/eeg_dilation_tbl
+    outs:
+    - Plot/Linescan dilations ECoG per trial 
+
+  Align ECoG to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_dilations_eeg');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/align_dilations_eeg.m
+    - Data/Linescans Data/dilation_timepoints
+    - Data/Linescans Data/recrig
+    - Data/Linescans Recrig Data/ephys
+    outs:
+    - Data/Linescans Data/eeg_dilation
+    - Data/Linescans Data/eeg_dilation_tbl
+
+  Export clean diameter traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_diam_all_clean');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/export_diam_all_clean.m
+    - Data/Linescans Data/clean_episodes
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/diameter_peri_baseline
+    outs:
+    - Plot/Linescan Diameter Clean Traces CSV
+
+  Process camera:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.process_camera');"
+    deps:
+    - Code/+eustoma/+processing/+linescans_recrig/process_camera.m
+    - Data/Linescans Recrig
+    - Data/Linescans Recrig Data/camera_rois
+    outs:
+    - Data/Linescans Recrig Data/camera_traces
+
+  Calc wakefulness episodes:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.calc_wakefulness_episodes');"
+    deps:
+    - Code/+eustoma/+processing/+linescans_recrig/calc_wakefulness_episodes.m
+    - Code/+eustoma/+processing/+linescans_recrig/calc_wakefulness_filter_whisking.m
+    - Data/Linescans Recrig Data/wheel
+    - Data/Linescans Recrig Data/camera_traces
+    - Data/Linescans Recrig Data/trial_id
+    - Data/Linescans Recrig Data/trial_type
+    outs:
+    - Data/Linescans Recrig Data/wakefulness_episodes
+
+  Plot behavior traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.plot_behavior_traces');"
+    deps:
+    - Code/+eustoma/+processing/+linescans_recrig/plot_behavior_traces.m
+    - Code/+eustoma/+processing/+linescans_recrig/calc_wakefulness_filter_whisking.m
+    - Data/Linescans Data/trial_id
+    - Data/Linescans Recrig Data/linescan
+    - Data/Linescans Recrig Data/wheel
+    - Data/Linescans Recrig Data/camera_traces
+    - Data/Linescans Recrig Data/trial_type
+    outs:
+    - Plot/Linescan behavior traces (awake only)
+
+  Check diam tbl Celine:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.check_diam_tbl_celine');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/check_diam_tbl_celine.m
+    - Plot/Linescan Tables/Diameter in Episodes.csv
+    outs:
+    - Plot/Linescan diameter check.png
+
+  Export diameter traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_diam_all');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/export_diam_all.m
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/diameter_peri_baseline
+    outs:
+    - Plot/Linescan Diameter Traces CSV
+
+  Transfer data:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.transfer_data');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/transfer_data.m
+    - Data/Linescans Recrig Data/linescan
+    - Data/Linescans Recrig Data/trial_type
+    - Data/Linescans Data/recrig
+    - Data/Linescans Data/trial_id
+    outs:
+    - Data/Linescans Data/trial_type
+    - Data/Linescans Recrig Data/trial_id
+
+  Plot num vessel IDs:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_trials_with_same_vessel_id');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_trials_with_same_vessel_id.m
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/vessel_id
+    outs:
+    - Plot/Linescan Tables/Num trials with vessel_id.png
+
+  Diam Traces for Gudmund:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_diam_for_gudmund');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/export_diam_for_gudmund.m
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/episodes
+    - Plot/Linescan Diameter Spectrograms Green
+    - Plot/Linescan Diameter Spectrograms Red
+    - Plot/Linescan Diameter Spectrograms Peri
+    outs:
+    - Plot/Linescan Diameter Traces for Gudmund
+
+  Plot Diameter Change Stats:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diameter_change_with_statistics');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_diameter_change_with_statistics.m
+    - Data/Linescans Data/diameter_in_episodes
+    outs:
+    - Plot/Linescan Diameter Change Statistics
+
+  Plot Diameter Change:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diameter_change');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_diameter_change.m
+    - Data/Linescans Data/diameter_in_episodes
+    outs:
+    - Plot/Linescan Diameter Change
+
+  Plot Diameter ECoG:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_red_diam_and_ecog');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_red_diam_and_ecog.m
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_peri_baseline
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/recrig
+    - Data/Linescans Recrig Data/ephys
+    outs:
+    - Plot/Linescan Diameter ECoG
+
+  Plot Baseline Diameter:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diameter_in_baseline');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_diameter_in_baseline.m
+    - Data/Linescans Data/diameter_in_episodes
+    outs:
+    - Plot/Linescan Diameter in Episodes
+
+  Calculate Baseline Diameter:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_baseline_diameter');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_baseline_diameter.m
+    - Data/Linescans Data/diameter_green
+    - Data/Linescans Data/diameter_red
+    - Data/Linescans Data/diameter_peri
+    - Data/Linescans Data/ignored_episodes_red
+    - Data/Linescans Data/ignored_episodes_green
+    - Data/Linescans Data/baseline_episodes
+    outs:
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_peri_baseline
+
+  Calculate Diameter in Episodes:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_in_episodes');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_diameter_in_episodes.m
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_peri_baseline
+    - Data/Linescans Data/episodes
+    outs:
+    - Data/Linescans Data/diameter_in_episodes
+    - Plot/Linescan Tables/Diameter in Episodes.csv
+
+  Threshold Linescans GUI:
+    cmd: echo Thresholding Linescans ready
+    deps:
+    - Code/+eustoma/+processing/+linescans/+diameter
+    - Data/Linescans Data/path
+    - Data/Linescans Data/trial_type
+    - Data/Linescans Data/vessels_red
+    - Data/Linescans Data/vessels_green
+
+  Gather Episodes:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.gather_episodes');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/gather_episodes.m
+    - Data/Linescans Data/recrig
+    - Data/Linescans Data/trial_id
+    - Data/Linescans Data/baseline_episodes
+    - Data/Linescans Data/awakening_episodes
+    - Data/Linescans Recrig Data/sleep_episodes
+    - Data/Linescans Recrig Data/wakefulness_episodes
+    outs:
+    - Data/Linescans Data/episodes
+
+  Plot Linescan Pulsatility in Sleep Matlab:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_pulsatility_in_sleep');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_pulsatility_in_sleep.m
+    - Data/Linescans Data/pulsatility_in_sleep
+    outs:
+    - Plot/Linescan Pulsatility in Sleep Matlab
+
+  Save Vessel Types:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.save_vessel_type');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/save_vessel_type.m
+    - Data/Linescans Data/trial_id
+    outs:
+    - Plot/Linescan Tables/Vessel Types.csv
+
+  Plot Linescan Pulsatility in Sleep:
+    cmd: venv/bin/python plot_linescan_pulsatility.py
+    wdir: Python Code
+    deps:
+    - plot_linescan_pulsatility.py
+    - ../Plot/Linescan Tables/Pulsatility in Sleep.csv
+    outs:
+    - ../Plot/Linescan Pulsatility in Sleep
+
+  Calc Linescan Pulsatility in Sleep:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_pulsatility_in_sleep');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_pulsatility_in_sleep.m
+    - Data/Linescans Data/recrig
+    - Data/Linescans Recrig Data/sleep_episodes
+    - Data/Linescans Data/pulsatility_green
+    - Data/Linescans Data/pulsatility_red
+    outs:
+    - Data/Linescans Data/pulsatility_in_sleep
+    - Plot/Linescan Tables/Pulsatility in Sleep.csv
+
+  Calc Linescan Pulsatility Red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_pulsatility_red');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_pulsatility_red.m
+    - Data/Linescans Data/diameter_red_baseline
+    outs:
+    - Data/Linescans Data/pulsatility_red
+
+  Calc Linescan Pulsatility Green:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_pulsatility_green');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_pulsatility_green.m
+    - Data/Linescans Data/diameter_green_baseline
+    outs:
+    - Data/Linescans Data/pulsatility_green
+
+  Mark Linescan Baseline:
+    cmd: echo Marking baseline ready
+    deps:
+    - Data/Linescans Recrig Data/start_time
+    - Data/Linescans Recrig Data/ephys
+    - Data/Linescans Recrig Data/sleep_episodes
+    - Data/Linescans Data/path
+    - Data/Linescans Data/trial_type
+    - Data/Linescans Data/recrig
+    - Data/Linescans Data/diameter_red
+    - Data/Linescans Data/linescan_info
+    - Data/Linescans Data/baseline_episodes
+    - Data/Linescans Data/vessels_red
+
+  Mark Linescan Sleep:
+    cmd: echo Marking sleep ready
+    deps:
+    - Data/Linescans Recrig Data/path
+    - Data/Linescans Recrig Data/duration
+    - Data/Linescans Recrig Data/start_time
+    - Data/Linescans Recrig Data/ephys
+    - Data/Linescans Recrig Data/sleep_episodes
+    - Data/Linescans Recrig Data/trial_type
+
+  save_linescans_data_overview:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.save_data_overview');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/save_data_overview.m
+    - Data/Linescans Data/path
+    - Data/Linescans Data/recrig
+    - Data/Linescans Data/vessel_type
+    - Data/Linescans Data/vessel_id
+    - Data/Linescans Data/trial_id
+    - Data/Linescans Data/linescan_crop
+    - Data/Linescans Data/linescan_crop_status
+    - Data/Linescans Data/linescan_info
+    - Data/Linescans Data/crosstalk_factor
+    - Data/Linescans Data/vessels_red_threshold
+    - Data/Linescans Data/vessels_red_threshold_status
+    - Data/Linescans Data/vessels_green_threshold
+    - Data/Linescans Data/vessels_green_threshold_status
+    - Data/Linescans Recrig Data/sleep_episodes
+    - Data/Linescans Recrig Data/trial_type
+    outs:
+    - Plot/Linescan overview
+
+  save_linescans_sleep_stats:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.save_sleep_stats');"
+    deps:
+    - Code/+eustoma/+processing/+linescans_recrig/save_sleep_stats.m
+    - Data/Linescans Recrig Data/path
+    - Data/Linescans Recrig Data/linescan
+    - Data/Linescans Recrig Data/sleep_episodes
+    - Data/Linescans Data/path
+    outs:
+    - Plot/Linescan Sleep Data
+
+  load_wheel:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.load_wheel');"
+    deps:
+    - Code/+eustoma/+processing/+linescans_recrig/load_wheel.m
+    - Data/Linescans Recrig
+    outs:
+    - Data/Linescans Recrig Data/wheel
+
+  load_linescans_recrig_info:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.load_trial_info');"
+    deps:
+    - Code/+eustoma/+processing/+linescans_recrig/load_trial_info.m
+    - Data/Linescans Recrig
+    outs:
+    - Data/Linescans Recrig Data/duration
+    - Data/Linescans Recrig Data/path
+    - Data/Linescans Recrig Data/start_time
+
+  process_linescans_ephys:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.process_ephys');"
+    deps:
+    - Code/+eustoma/+processing/+linescans_recrig/process_ephys.m
+    - Data/Linescans Recrig
+    outs:
+    - Data/Linescans Recrig Data/ephys
+
+  plot_spectrogram_green:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_spectrogram_green');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_spectrogram_green.m
+    - Code/+eustoma/+processing/+linescans/get_sleep_color_table.m
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/vessels_green
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/trial_type
+    - Data/Linescans Data/vessel_type
+    outs:
+    - Plot/Linescan Diameter Spectrograms Green
+
+  plot_spectrogram_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_spectrogram_red');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_spectrogram_red.m
+    - Code/+eustoma/+processing/+linescans/get_sleep_color_table.m
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/vessels_red
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/trial_type
+    - Data/Linescans Data/vessel_type
+    outs:
+    - Plot/Linescan Diameter Spectrograms Red
+
+  plot_spectrogram_peri:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_spectrogram_peri');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/plot_spectrogram_peri.m
+    - Code/+eustoma/+processing/+linescans/get_sleep_color_table.m
+    - Data/Linescans Data/diameter_peri_baseline
+    - Data/Linescans Data/diameter_red_baseline
+    - Data/Linescans Data/diameter_green_baseline
+    - Data/Linescans Data/vessels_green
+    - Data/Linescans Data/vessels_red
+    - Data/Linescans Data/episodes
+    - Data/Linescans Data/trial_type
+    - Data/Linescans Data/vessel_type
+    outs:
+    - Plot/Linescan Diameter Spectrograms Peri
+
+  calc_diameter_peri:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_peri');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_diameter_peri.m
+    - Data/Linescans Data/diameter_green
+    - Data/Linescans Data/diameter_red
+    outs:
+    - Data/Linescans Data/diameter_peri
+
+  calc_diameter_green:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_green');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_diameter_green.m
+    - Code/+eustoma/+processing/+linescans/+diameter/threshold_linescan.m
+    - Data/Linescans Data/vessels_green
+    - Data/Linescans Data/vessels_green_threshold
+    outs:
+    - Data/Linescans Data/diameter_green
+    - Plot/Linescans without diameter green
+
+  calc_diameter_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_red');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/calc_diameter_red.m
+    - Code/+eustoma/+processing/+linescans/+diameter/threshold_linescan.m
+    - Data/Linescans Data/vessels_red
+    - Data/Linescans Data/vessels_red_threshold
+    outs:
+    - Data/Linescans Data/diameter_red
+    - Plot/Linescans without diameter red
+
+  Adjust Crosstalk GUI:
+    cmd: echo Adjusting crosstalk ready
+    deps:
+    - Data/Linescans Data/vessels_green_raw
+    - Data/Linescans Data/vessels_red_raw
+    - Data/Linescans Data/crosstalk_factor
+    - Data/Linescans Data/linescan_info
+    - Data/Linescans Data/trial_type
+
+  Adjust Crosstalk:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.crosstalk.adjust_crosstalk');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/+crosstalk/adjust_crosstalk.m
+    - Data/Linescans Data/vessels_green_raw
+    - Data/Linescans Data/vessels_red_raw
+    - Data/Linescans Data/crosstalk_factor
+    - Data/Linescans Data/crosstalk_note
+    outs:
+    - Data/Linescans Data/vessels_green
+    - Data/Linescans Data/vessels_red
+
+  Crop Linescan Vessels:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.crop_vessels');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/crop_vessels.m
+    - Code/+eustoma/+util/merge_frames.m
+    - Data/Linescans Data/linescan_info
+    - Data/Linescans Data/linescan_crop
+    - Data/Linescans Data/linescan_crop_status
+    - Data/Linescans Data/path
+    - Data/Linescans Data/trial_id
+    - Data/Linescans
+    outs:
+    - Data/Linescans Data/vessels_green_raw
+    - Data/Linescans Data/vessels_red_raw
+    - Plot/Linescan Vessel Outlines
+    - Plot/Linescans without crop
+
+  link_linescans_trials:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.link_trials');"
+    deps:
+    - Code/+eustoma/+processing/+linescans/link_trials.m
+    - Data/Linescans Data/linescan_info
+    - Data/Linescans Recrig Data/start_time
+    - Data/Linescans Recrig Data/path
+    outs:
+    - Data/Linescans Recrig Data/linescan
+    - Data/Linescans Data/recrig
+    - Plot/Linescan Tables/Trial Links
+
+  load_linescans_info:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.load_trial_info');"
+    deps:
+    - Code/+eustoma/+linescan/find_linescans.m
+    - Code/+eustoma/+linescan/LineScan.m
+    - Code/+eustoma/+processing/+linescans/load_trial_info.m
+    - Code/+eustoma/get_linescans.m
+    - Data/Linescans
+    - Data/Linescans Data/vessel_type
+    outs:
+    - Data/Linescans Data/linescan_info
+    - Data/Linescans Data/path
+    - Data/Linescans Data/trial_id

@@ -1,0 +1,5 @@
+outs:
+- md5: 4bd0898715a13f93936cd7cba676d240.dir
+  size: 291904
+  nfiles: 50
+  path: clean_episodes

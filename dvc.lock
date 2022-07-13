@@ -1,0 +1,1653 @@
+schema: '2.0'
+stages:
+  load_linescans_info:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.load_trial_info');"
+    deps:
+    - path: Code/+eustoma/+linescan/LineScan.m
+      md5: 1602d0d16a28f02ce2fc5fcd08f32b59
+      size: 3904
+    - path: Code/+eustoma/+linescan/find_linescans.m
+      md5: 0ea9ddc921a2febc75840b2ad70ab976
+      size: 584
+    - path: Code/+eustoma/+processing/+linescans/load_trial_info.m
+      md5: 030b4895fb5a11dd96804ecc4f526af8
+      size: 1459
+    - path: Code/+eustoma/get_linescans.m
+      md5: 9a0e04bcba700893761845bc2aaa1c16
+      size: 379
+    - path: Data/Linescans
+      md5: d0a715c38d12743992d3d04f82c7a334.dir
+      size: 1185116244801
+      nfiles: 1339
+    - path: Data/Linescans Data/vessel_type
+      md5: b7d6eb8cd02ac6a970b3102ad07f1700.dir
+      size: 61592
+      nfiles: 305
+    outs:
+    - path: Data/Linescans Data/linescan_info
+      md5: 883c41562935b2e51a7b1082fa41e736.dir
+      size: 622432
+      nfiles: 293
+    - path: Data/Linescans Data/path
+      md5: 7b4758456dcf46cbb50a364a14eea2bb.dir
+      size: 65632
+      nfiles: 293
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+  load_linescans_recrig_info:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.load_trial_info');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans_recrig/load_trial_info.m
+      md5: 72c629d9a475f62b4299ae3788a97ad5
+      size: 506
+    - path: Data/Linescans Recrig
+      md5: 9774741957440286061fe5653d99e968.dir
+      size: 306853471374
+      nfiles: 2473
+    outs:
+    - path: Data/Linescans Recrig Data/duration
+      md5: dc8284b8d4707fd8049f9e0142c322c3.dir
+      size: 57600
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/path
+      md5: 64c9b81f5e8c822d4a03a532ae3654bb.dir
+      size: 73072
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/start_time
+      md5: 373517764441a0dd09c8cc85290a508d.dir
+      size: 398496
+      nfiles: 300
+  Process camera:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.process_camera');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans_recrig/process_camera.m
+      md5: 04aba95b689eae42f7026ebf5f85688d
+      size: 181
+    - path: Data/Linescans Recrig
+      md5: 9774741957440286061fe5653d99e968.dir
+      size: 306853471374
+      nfiles: 2473
+    - path: Data/Linescans Recrig Data/camera_rois
+      md5: 13df59880415e58828d731dccd36c968.dir
+      size: 62008768
+      nfiles: 67
+    outs:
+    - path: Data/Linescans Recrig Data/camera_traces
+      md5: d22da153993be9bea504f4964a98a860.dir
+      size: 115827944
+      nfiles: 67
+  Crop Linescan Vessels:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.crop_vessels');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/crop_vessels.m
+      md5: 602f5c7ae7a642e86bbe977439300315
+      size: 9864
+    - path: Code/+eustoma/+util/merge_frames.m
+      md5: 0e3dd05ce00f84bd1cb877fae10afbbb
+      size: 308
+    - path: Data/Linescans
+      md5: d0a715c38d12743992d3d04f82c7a334.dir
+      size: 1185116244801
+      nfiles: 1339
+    - path: Data/Linescans Data/linescan_crop
+      md5: e503d15130ca4577cc9b1f7a10d3f7ad.dir
+      size: 55752
+      nfiles: 303
+    - path: Data/Linescans Data/linescan_crop_status
+      md5: 3a3038ed43e1402270ba4d2bdd91b161.dir
+      size: 56064
+      nfiles: 292
+    - path: Data/Linescans Data/linescan_info
+      md5: 883c41562935b2e51a7b1082fa41e736.dir
+      size: 622432
+      nfiles: 293
+    - path: Data/Linescans Data/path
+      md5: 7b4758456dcf46cbb50a364a14eea2bb.dir
+      size: 65632
+      nfiles: 293
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    outs:
+    - path: Data/Linescans Data/vessels_green_raw
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red_raw
+      md5: c77665f50c1da88690c845a5cc897aa7.dir
+      size: 39071301760
+      nfiles: 288
+    - path: Plot/Linescan Vessel Outlines
+      md5: 25d511478f97108a10dd9a7de6e7133a.dir
+      size: 85171669
+      nfiles: 288
+    - path: Plot/Linescans without crop
+      md5: cfa7091c4dfa2a6294a6102baf445f44.dir
+      size: 11554531
+      nfiles: 8
+  Adjust Crosstalk:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.crosstalk.adjust_crosstalk');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/+crosstalk/adjust_crosstalk.m
+      md5: a229dfc001eb6fc60c788fa1945c9e8b
+      size: 1010
+    - path: Data/Linescans Data/crosstalk_factor
+      md5: 9a41f49e12e519b8f36c359f96bfbbad.dir
+      size: 604168
+      nfiles: 362
+    - path: Data/Linescans Data/crosstalk_note
+      md5: ae3cd128725723fa14eb2d31b534ffe6.dir
+      size: 184
+      nfiles: 1
+    - path: Data/Linescans Data/vessels_green_raw
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red_raw
+      md5: c77665f50c1da88690c845a5cc897aa7.dir
+      size: 39071301760
+      nfiles: 288
+    outs:
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+  calc_diameter_green:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_green');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/+diameter/threshold_linescan.m
+      md5: ffb236fa46e04db0c2fd12545b0a3520
+      size: 1552
+    - path: Code/+eustoma/+processing/+linescans/calc_diameter_green.m
+      md5: fa474199cedcfbd1cd9f9446d5e9cfa8
+      size: 2348
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_green_threshold
+      md5: 58cd38e245816dba6940ad8c376907a4.dir
+      size: 462720
+      nfiles: 120
+    outs:
+    - path: Data/Linescans Data/diameter_green
+      md5: 0a78beb19cf78a0dd449d65a130541c6.dir
+      size: 298560808
+      nfiles: 120
+    - path: Plot/Linescans without diameter green
+      md5: 7f63dde1101a675b09a2049e7b124ff0.dir
+      size: 85259307
+      nfiles: 92
+  calc_diameter_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_red');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/+diameter/threshold_linescan.m
+      md5: ffb236fa46e04db0c2fd12545b0a3520
+      size: 1552
+    - path: Code/+eustoma/+processing/+linescans/calc_diameter_red.m
+      md5: 1b06147c0d219967a531a14e411e3a1b
+      size: 2315
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+    - path: Data/Linescans Data/vessels_red_threshold
+      md5: 89f1cde45af972b3b1bc3dd7d8303489.dir
+      size: 701792
+      nfiles: 182
+    outs:
+    - path: Data/Linescans Data/diameter_red
+      md5: 989be05c55ee6ddfebf08f7ee2dd52e7.dir
+      size: 402701208
+      nfiles: 182
+    - path: Plot/Linescans without diameter red
+      md5: 567cd0d0cd59bd78ba44c4ef3adc33f4.dir
+      size: 124411741
+      nfiles: 106
+  calc_diameter_peri:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_peri');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_diameter_peri.m
+      md5: 252b8985b898c2ab92b973b4ab8e5cdb
+      size: 697
+    - path: Data/Linescans Data/diameter_green
+      md5: 0a78beb19cf78a0dd449d65a130541c6.dir
+      size: 298560808
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_red
+      md5: 989be05c55ee6ddfebf08f7ee2dd52e7.dir
+      size: 402701208
+      nfiles: 182
+    outs:
+    - path: Data/Linescans Data/diameter_peri
+      md5: 6205c77ee2bad7b84ba3e480c528a1cb.dir
+      size: 163962832
+      nfiles: 100
+  Calculate Baseline Diameter:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_baseline_diameter');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_baseline_diameter.m
+      md5: 5b76a8da81b8f9c6f2add6dbace7ae0d
+      size: 4106
+    - path: Data/Linescans Data/baseline_episodes
+      md5: fc0c65b6bd0b2ae02407ee5929b1d776.dir
+      size: 721568
+      nfiles: 165
+    - path: Data/Linescans Data/diameter_green
+      md5: 0a78beb19cf78a0dd449d65a130541c6.dir
+      size: 298560808
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri
+      md5: 6205c77ee2bad7b84ba3e480c528a1cb.dir
+      size: 163962832
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red
+      md5: 989be05c55ee6ddfebf08f7ee2dd52e7.dir
+      size: 402701208
+      nfiles: 182
+    - path: Data/Linescans Data/ignored_episodes_green
+      md5: b724b7aba84947c5e952e0e0bb197e05.dir
+      size: 279232
+      nfiles: 73
+    - path: Data/Linescans Data/ignored_episodes_red
+      md5: fa7bdbb11c132fa978dc9f60b9c73f9f.dir
+      size: 386088
+      nfiles: 102
+    outs:
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri_baseline
+      md5: 6db88862b622331685ed7088893d31e6.dir
+      size: 163975632
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+  calc_vessel_wall_traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_vessel_wall_traces');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_vessel_wall_traces.m
+      md5: 593e7c05b5fc8b42164696f70723ba62
+      size: 2525
+    - path: Data/Linescans Data/diameter_green
+      md5: 0a78beb19cf78a0dd449d65a130541c6.dir
+      size: 298560808
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_red
+      md5: 989be05c55ee6ddfebf08f7ee2dd52e7.dir
+      size: 402701208
+      nfiles: 182
+    - path: Data/Linescans Data/ignored_episodes_green
+      md5: b724b7aba84947c5e952e0e0bb197e05.dir
+      size: 279232
+      nfiles: 73
+    - path: Data/Linescans Data/ignored_episodes_red
+      md5: fa7bdbb11c132fa978dc9f60b9c73f9f.dir
+      size: 386088
+      nfiles: 102
+    outs:
+    - path: Data/Linescans Data/vessel_wall
+      md5: 76eb859423640ff7bde7b79b6c7ca6e1.dir
+      size: 408977064
+      nfiles: 100
+  calc_vessel_core_traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_vessel_core_traces');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_vessel_core_traces.m
+      md5: 7514a2308e108a261e5132e8624571d9
+      size: 616
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    outs:
+    - path: Data/Linescans Data/core_trace
+      md5: a7f9745f340714d9463b3fc19cf1ada3.dir
+      size: 178361536
+      nfiles: 212
+  Plot num vessel IDs:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_trials_with_same_vessel_id');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_trials_with_same_vessel_id.m
+      md5: 88abea79dadc9148730a3e0e691078ad
+      size: 716
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/vessel_id
+      md5: b2e1c12281201b01b6635f22956bb283.dir
+      size: 36616
+      nfiles: 199
+    outs:
+    - path: Plot/Linescan Tables/Num trials with vessel_id.png
+      md5: 49f563ed1300c35df9ea78991ad80e7c
+      size: 19655
+  link_linescans_trials:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.link_trials');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/link_trials.m
+      md5: d1aa2bd4055bb35905515604a9c0f3fa
+      size: 3031
+    - path: Data/Linescans Data/linescan_info
+      md5: 883c41562935b2e51a7b1082fa41e736.dir
+      size: 622432
+      nfiles: 293
+    - path: Data/Linescans Recrig Data/path
+      md5: 64c9b81f5e8c822d4a03a532ae3654bb.dir
+      size: 73072
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/start_time
+      md5: 373517764441a0dd09c8cc85290a508d.dir
+      size: 398496
+      nfiles: 300
+    outs:
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/linescan
+      md5: 1e525bc90d950d0c8bf7cd2cc65cc7c4.dir
+      size: 63616
+      nfiles: 284
+    - path: Plot/Linescan Tables/Trial Links
+      md5: 8ab408f6d16607b57cff3e721f7fac41.dir
+      size: 49326
+      nfiles: 3
+  load_wheel:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.load_wheel');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans_recrig/load_wheel.m
+      md5: b8da82a91fb29b3afee280d241c2ac9c
+      size: 886
+    - path: Data/Linescans Recrig
+      md5: 9774741957440286061fe5653d99e968.dir
+      size: 306853471374
+      nfiles: 2473
+    outs:
+    - path: Data/Linescans Recrig Data/wheel
+      md5: 0a4f68a3cbb67cacc33e03a9b4ae1e6e.dir
+      size: 42425448
+      nfiles: 300
+  Transfer data:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.transfer_data');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/transfer_data.m
+      md5: 2e11aff8fa4f53486640c3935b88c328
+      size: 677
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    - path: Data/Linescans Recrig Data/linescan
+      md5: 1e525bc90d950d0c8bf7cd2cc65cc7c4.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/trial_type
+      md5: 102b55c621951155e72127fcbabd6da4.dir
+      size: 57600
+      nfiles: 300
+    outs:
+    - path: Data/Linescans Data/trial_type
+      md5: 3197aba10eb14c11f6c3ecd6bc837a51.dir
+      size: 54528
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/trial_id
+      md5: 955c709f58fdb825a0d9f16f75abf6f1.dir
+      size: 829096
+      nfiles: 284
+  Calc wakefulness episodes:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.calc_wakefulness_episodes');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans_recrig/calc_wakefulness_episodes.m
+      md5: 5cd1b00237391961cd180f6b8dd023b7
+      size: 3895
+    - path: Code/+eustoma/+processing/+linescans_recrig/calc_wakefulness_filter_whisking.m
+      md5: f3383c840df699846e94b5e5ed92ad51
+      size: 202
+    - path: Data/Linescans Recrig Data/camera_traces
+      md5: d22da153993be9bea504f4964a98a860.dir
+      size: 115827944
+      nfiles: 67
+    - path: Data/Linescans Recrig Data/trial_id
+      md5: 955c709f58fdb825a0d9f16f75abf6f1.dir
+      size: 829096
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/trial_type
+      md5: 102b55c621951155e72127fcbabd6da4.dir
+      size: 57600
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/wheel
+      md5: 0a4f68a3cbb67cacc33e03a9b4ae1e6e.dir
+      size: 42425448
+      nfiles: 300
+    outs:
+    - path: Data/Linescans Recrig Data/wakefulness_episodes
+      md5: 3b50d419fedb35bc608ceb60b1a41322.dir
+      size: 638568
+      nfiles: 67
+  Gather Episodes:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.gather_episodes');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/gather_episodes.m
+      md5: 7df587c3874eb76b63b1075585a61ad5
+      size: 1777
+    - path: Data/Linescans Data/awakening_episodes
+      md5: 81ef60fb79ee508ea89bf1917b742a93.dir
+      size: 169328
+      nfiles: 38
+    - path: Data/Linescans Data/baseline_episodes
+      md5: fc0c65b6bd0b2ae02407ee5929b1d776.dir
+      size: 721568
+      nfiles: 165
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    - path: Data/Linescans Recrig Data/sleep_episodes
+      md5: 818d48a7f3734809aed60a19bab1db42.dir
+      size: 867720
+      nfiles: 187
+    - path: Data/Linescans Recrig Data/wakefulness_episodes
+      md5: 3b50d419fedb35bc608ceb60b1a41322.dir
+      size: 638568
+      nfiles: 67
+    outs:
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+  Calc Linescan Pulsatility Green:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_pulsatility_green');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_pulsatility_green.m
+      md5: 0284c4ac6e81afcb4ead562e66a18fc1
+      size: 873
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    outs:
+    - path: Data/Linescans Data/pulsatility_green
+      md5: bd93889bf48cff22922573d864f90e99.dir
+      size: 497116920
+      nfiles: 120
+  Calc Linescan Pulsatility Red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_pulsatility_red');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_pulsatility_red.m
+      md5: 6d5e3f3f8e61e24dcb6606269dd2d8a9
+      size: 849
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    outs:
+    - path: Data/Linescans Data/pulsatility_red
+      md5: 6e9931065030d76acd8ae9d103274107.dir
+      size: 670436216
+      nfiles: 182
+  Calc Linescan Pulsatility in Sleep:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_pulsatility_in_sleep');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_pulsatility_in_sleep.m
+      md5: b34141d15351b0eaa95e3babb8b81982
+      size: 3363
+    - path: Data/Linescans Data/pulsatility_green
+      md5: bd93889bf48cff22922573d864f90e99.dir
+      size: 497116920
+      nfiles: 120
+    - path: Data/Linescans Data/pulsatility_red
+      md5: 6e9931065030d76acd8ae9d103274107.dir
+      size: 670436216
+      nfiles: 182
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/sleep_episodes
+      md5: 818d48a7f3734809aed60a19bab1db42.dir
+      size: 867720
+      nfiles: 187
+    outs:
+    - path: Data/Linescans Data/pulsatility_in_sleep
+      md5: 585b36e1b4419c56d02bd50a346d6a58.dir
+      size: 1200952
+      nfiles: 138
+    - path: Plot/Linescan Tables/Pulsatility in Sleep.csv
+      md5: 38a210dc70857a28c76d04717498fd03
+      size: 224149
+  Calculate Diameter in Episodes:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_diameter_in_episodes');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_diameter_in_episodes.m
+      md5: 91bcb9debd7cec2174a7c9a8976f53a2
+      size: 6393
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri_baseline
+      md5: 6db88862b622331685ed7088893d31e6.dir
+      size: 163975632
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    outs:
+    - path: Data/Linescans Data/diameter_in_episodes
+      md5: 471c337e4fdef126c115cf81ae832718.dir
+      size: 5354816
+      nfiles: 199
+    - path: Plot/Linescan Tables/Diameter in Episodes.csv
+      md5: f65e5af6a09e415b7ace81df6fd1735a
+      size: 2465525
+  Plot Diameter Change:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diameter_change');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_diameter_change.m
+      md5: 428109bad5e693c262207986c87df974
+      size: 10126
+    - path: Data/Linescans Data/diameter_in_episodes
+      md5: 471c337e4fdef126c115cf81ae832718.dir
+      size: 5354816
+      nfiles: 199
+    outs:
+    - path: Plot/Linescan Diameter Change
+      md5: 8898b06a256f7afc3c0c2602d793c1f0.dir
+      size: 2486009
+      nfiles: 14
+  Check diam tbl Celine:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.check_diam_tbl_celine');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/check_diam_tbl_celine.m
+      md5: 17a453ae5c94664935645a4759a1284a
+      size: 389
+    - path: Plot/Linescan Tables/Diameter in Episodes.csv
+      md5: f65e5af6a09e415b7ace81df6fd1735a
+      size: 2465525
+    outs:
+    - path: Plot/Linescan diameter check.png
+      md5: 465dc4c5d345b8b964406ee564a14a3e
+      size: 28119
+  Align diameter to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_dilations_diameter');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/align_dilations_diameter.m
+      md5: 4b7d45214cb5841c8deaf98743f9efb0
+      size: 2623
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri_baseline
+      md5: 6db88862b622331685ed7088893d31e6.dir
+      size: 163975632
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/dilation_timepoints
+      md5: 52be15248f10a712776c02685d528161.dir
+      size: 72400
+      nfiles: 15
+    outs:
+    - path: Data/Linescans Data/diameter_dilation
+      md5: ccd25e392933eb2371b5d36f57e8875a.dir
+      size: 391080
+      nfiles: 15
+    - path: Data/Linescans Data/diameter_dilation_tbl
+      md5: 296daa7ba180ccbdea3527934bf06d49.dir
+      size: 15749568
+      nfiles: 15
+  process_linescans_ephys:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.process_ephys');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans_recrig/process_ephys.m
+      md5: 5b990b072959446a298447e97adc0ae3
+      size: 1076
+    - path: Data/Linescans Recrig
+      md5: 9774741957440286061fe5653d99e968.dir
+      size: 306853471374
+      nfiles: 2473
+    outs:
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+  Plot Diameter ECoG:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_red_diam_and_ecog');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_red_diam_and_ecog.m
+      md5: c0f05c572adedfe59c88302252fceccb
+      size: 3868
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri_baseline
+      md5: 6db88862b622331685ed7088893d31e6.dir
+      size: 163975632
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+    outs:
+    - path: Plot/Linescan Diameter ECoG
+      md5: 1717d48b7d10a61dd9064a25496c43bf.dir
+      size: 82203301
+      nfiles: 100
+  Align ECoG to PVS:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_pvs_eeg');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/align_pvs_eeg.m
+      md5: 6ad67d42fc76b2b43a4e6bfc098efc69
+      size: 2619
+    - path: Data/Linescans Data/pvs_timepoints
+      md5: 693d3457b13adb8b0a235f2ebc059584.dir
+      size: 46112
+      nfiles: 11
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+    outs:
+    - path: Data/Linescans Data/eeg_pvs
+      md5: fce8b3fe1e5a19ea40c4aa04bc6ca469.dir
+      size: 1818960
+      nfiles: 11
+    - path: Data/Linescans Data/eeg_pvs_tbl
+      md5: 1d9bada0809affd112a05a7a0dc76b99.dir
+      size: 1442570608
+      nfiles: 11
+  Plot ECoG to PVS:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_pvs_eeg');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_aligned_pvs_eeg.m
+      md5: 4dd67d7294f9687086346da4d08c910b
+      size: 4241
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/eeg_pvs
+      md5: fce8b3fe1e5a19ea40c4aa04bc6ca469.dir
+      size: 1818960
+      nfiles: 11
+    - path: Data/Linescans Data/eeg_pvs_tbl
+      md5: 1d9bada0809affd112a05a7a0dc76b99.dir
+      size: 1442570608
+      nfiles: 11
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/pvs_timepoints
+      md5: 693d3457b13adb8b0a235f2ebc059584.dir
+      size: 46112
+      nfiles: 11
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+    outs:
+    - path: Plot/Linescan PVS timepoint per trial ECoG
+      md5: 07b3317f3f7ed03c7657e872873a85cd.dir
+      size: 8540413
+      nfiles: 11
+  Plot Diameter Change Stats:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diameter_change_with_statistics');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_diameter_change_with_statistics.m
+      md5: 0639bdef264b151d4506ee640fef6bde
+      size: 2102
+    - path: Data/Linescans Data/diameter_in_episodes
+      md5: 471c337e4fdef126c115cf81ae832718.dir
+      size: 5354816
+      nfiles: 199
+    outs:
+    - path: Plot/Linescan Diameter Change Statistics
+      md5: 94ce7f2c66b74d023dcfbc9be168b246.dir
+      size: 155083
+      nfiles: 10
+  Plot behavior traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.plot_behavior_traces');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans_recrig/calc_wakefulness_filter_whisking.m
+      md5: f3383c840df699846e94b5e5ed92ad51
+      size: 202
+    - path: Code/+eustoma/+processing/+linescans_recrig/plot_behavior_traces.m
+      md5: f7efea90097100664a1567f33dc784a2
+      size: 3640
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    - path: Data/Linescans Recrig Data/camera_traces
+      md5: d22da153993be9bea504f4964a98a860.dir
+      size: 115827944
+      nfiles: 67
+    - path: Data/Linescans Recrig Data/linescan
+      md5: 1e525bc90d950d0c8bf7cd2cc65cc7c4.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/trial_type
+      md5: 102b55c621951155e72127fcbabd6da4.dir
+      size: 57600
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/wheel
+      md5: 0a4f68a3cbb67cacc33e03a9b4ae1e6e.dir
+      size: 42425448
+      nfiles: 300
+    outs:
+    - path: Plot/Linescan behavior traces (awake only)
+      md5: da16c8d772f7c66b51b72d5c7201d612.dir
+      size: 19244741
+      nfiles: 70
+  Plot diameter to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_diameter');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_aligned_dilations_diameter.m
+      md5: 3d9b2fd2c0926d5c20677e71f75c0abe
+      size: 3496
+    - path: Data/Linescans Data/diameter_dilation
+      md5: ccd25e392933eb2371b5d36f57e8875a.dir
+      size: 391080
+      nfiles: 15
+    - path: Data/Linescans Data/diameter_dilation_tbl
+      md5: 296daa7ba180ccbdea3527934bf06d49.dir
+      size: 15749568
+      nfiles: 15
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/dilation_timepoints
+      md5: 52be15248f10a712776c02685d528161.dir
+      size: 72400
+      nfiles: 15
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    outs:
+    - path: Plot/Linescan dilations per trial diameter
+      md5: f6634fbca3a10917d851b92214f4a918.dir
+      size: 44040238
+      nfiles: 15
+  Plot Linescan Pulsatility in Sleep:
+    cmd: venv/bin/python plot_linescan_pulsatility.py
+    deps:
+    - path: ../Plot/Linescan Tables/Pulsatility in Sleep.csv
+      md5: 38a210dc70857a28c76d04717498fd03
+      size: 224149
+    - path: plot_linescan_pulsatility.py
+      md5: e3c1a47652d2f240a5f78a0344df6719
+      size: 5352
+    outs:
+    - path: ../Plot/Linescan Pulsatility in Sleep
+      md5: e58a9551f2dcbb20dba2a67383655ff4.dir
+      size: 517370
+      nfiles: 17
+  Align ECoG to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_dilations_eeg');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/align_dilations_eeg.m
+      md5: c736a420a9e78b4ae797ac60d02a2bde
+      size: 2940
+    - path: Data/Linescans Data/dilation_timepoints
+      md5: 52be15248f10a712776c02685d528161.dir
+      size: 72400
+      nfiles: 15
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+    outs:
+    - path: Data/Linescans Data/eeg_dilation
+      md5: 711817cac8f324121857a52822a38b66.dir
+      size: 2480400
+      nfiles: 15
+    - path: Data/Linescans Data/eeg_dilation_tbl
+      md5: ee0a7857d011ee931b9e6a2964ddf03b.dir
+      size: 4144786464
+      nfiles: 15
+  Plot ECoG to dilations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_eeg');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_aligned_dilations_eeg.m
+      md5: a4fe1b52895e52fb78725256b80f5bce
+      size: 4337
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/dilation_timepoints
+      md5: 52be15248f10a712776c02685d528161.dir
+      size: 72400
+      nfiles: 15
+    - path: Data/Linescans Data/eeg_dilation
+      md5: 711817cac8f324121857a52822a38b66.dir
+      size: 2480400
+      nfiles: 15
+    - path: Data/Linescans Data/eeg_dilation_tbl
+      md5: ee0a7857d011ee931b9e6a2964ddf03b.dir
+      size: 4144786464
+      nfiles: 15
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+    outs:
+    - path: Plot/Linescan dilations ECoG per trial
+      md5: 94c63e9575e7abe4365ca4c4bf272fe6.dir
+      size: 14385912
+      nfiles: 15
+  plot_vessel_core_traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_vessel_core_traces');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_vessel_core_traces.m
+      md5: 36999c7161b42675f01961dcfa851249
+      size: 2547
+    - path: Data/Linescans Data/core_trace
+      md5: a7f9745f340714d9463b3fc19cf1ada3.dir
+      size: 178361536
+      nfiles: 212
+    outs:
+    - path: Plot/Linescan vessel center traces
+      md5: 5af3c3eae5d291a3036c1bb3463b7a1f.dir
+      size: 26122565
+      nfiles: 120
+  Threshold Linescans GUI:
+    cmd: echo Thresholding Linescans ready
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/+diameter
+      md5: 63a11cbd4965815136ce447ab211a272.dir
+      size: 83915
+      nfiles: 5
+    - path: Data/Linescans Data/path
+      md5: 7b4758456dcf46cbb50a364a14eea2bb.dir
+      size: 65632
+      nfiles: 293
+    - path: Data/Linescans Data/trial_type
+      md5: 3197aba10eb14c11f6c3ecd6bc837a51.dir
+      size: 54528
+      nfiles: 284
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+  Mark Linescan Sleep:
+    cmd: echo Marking sleep ready
+    deps:
+    - path: Data/Linescans Recrig Data/duration
+      md5: dc8284b8d4707fd8049f9e0142c322c3.dir
+      size: 57600
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/path
+      md5: 64c9b81f5e8c822d4a03a532ae3654bb.dir
+      size: 73072
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/sleep_episodes
+      md5: 818d48a7f3734809aed60a19bab1db42.dir
+      size: 867720
+      nfiles: 187
+    - path: Data/Linescans Recrig Data/start_time
+      md5: 373517764441a0dd09c8cc85290a508d.dir
+      size: 398496
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/trial_type
+      md5: 102b55c621951155e72127fcbabd6da4.dir
+      size: 57600
+      nfiles: 300
+  plot_diam_on_vessels:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diam_on_vessels');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_diam_on_vessels.m
+      md5: 5ee659b5da52b5d4b3d02c140e15c179
+      size: 3631
+    - path: Code/Iris/+iris/+episodes/plot_episodes.m
+      md5: 1e0d64cf176b6c96e2dc8131b544c49f
+      size: 1778
+    - path: Code/Iris/+iris/+linescan/plot_vessel_dual_color.m
+      md5: cb03cc3f9fdfa4c80923fc009a6962f9
+      size: 956
+    - path: Code/Iris/+iris/+time_series/plot_separate.m
+      md5: 161bd99c269e26c4cb95c05bc494deca
+      size: 1319
+    - path: Data/Linescans Data/clean_episodes
+      md5: 4bd0898715a13f93936cd7cba676d240.dir
+      size: 291904
+      nfiles: 50
+    - path: Data/Linescans Data/vessel_wall
+      md5: 76eb859423640ff7bde7b79b6c7ca6e1.dir
+      size: 408977064
+      nfiles: 100
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+    outs:
+    - path: Plot/Linescan Vessel Images Figures
+      md5: 2a02ca37196313424523740e70e0f7a6.dir
+      size: 459001479
+      nfiles: 6
+  save_linescans_data_overview:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.save_data_overview');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/save_data_overview.m
+      md5: 6ba38f32adf4af9bc724c76889bbac4d
+      size: 11217
+    - path: Data/Linescans Data/crosstalk_factor
+      md5: 9a41f49e12e519b8f36c359f96bfbbad.dir
+      size: 604168
+      nfiles: 362
+    - path: Data/Linescans Data/linescan_crop
+      md5: e503d15130ca4577cc9b1f7a10d3f7ad.dir
+      size: 55752
+      nfiles: 303
+    - path: Data/Linescans Data/linescan_crop_status
+      md5: 3a3038ed43e1402270ba4d2bdd91b161.dir
+      size: 56064
+      nfiles: 292
+    - path: Data/Linescans Data/linescan_info
+      md5: 883c41562935b2e51a7b1082fa41e736.dir
+      size: 622432
+      nfiles: 293
+    - path: Data/Linescans Data/path
+      md5: 7b4758456dcf46cbb50a364a14eea2bb.dir
+      size: 65632
+      nfiles: 293
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    - path: Data/Linescans Data/vessel_id
+      md5: b2e1c12281201b01b6635f22956bb283.dir
+      size: 36616
+      nfiles: 199
+    - path: Data/Linescans Data/vessel_type
+      md5: b7d6eb8cd02ac6a970b3102ad07f1700.dir
+      size: 61592
+      nfiles: 305
+    - path: Data/Linescans Data/vessels_green_threshold
+      md5: 58cd38e245816dba6940ad8c376907a4.dir
+      size: 462720
+      nfiles: 120
+    - path: Data/Linescans Data/vessels_green_threshold_status
+      md5: c6dde00601b1b30722895ad233d71ba5.dir
+      size: 30736
+      nfiles: 166
+    - path: Data/Linescans Data/vessels_red_threshold
+      md5: 89f1cde45af972b3b1bc3dd7d8303489.dir
+      size: 701792
+      nfiles: 182
+    - path: Data/Linescans Data/vessels_red_threshold_status
+      md5: 67b80d01ebc76f8fea6ea0e609410235.dir
+      size: 49152
+      nfiles: 265
+    - path: Data/Linescans Recrig Data/sleep_episodes
+      md5: 818d48a7f3734809aed60a19bab1db42.dir
+      size: 867720
+      nfiles: 187
+    - path: Data/Linescans Recrig Data/trial_type
+      md5: 102b55c621951155e72127fcbabd6da4.dir
+      size: 57600
+      nfiles: 300
+    outs:
+    - path: Plot/Linescan overview
+      md5: c07229eaf6d368469c4bc6947270c501.dir
+      size: 202621
+      nfiles: 20
+  align_dilations_core_trace:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.align_dilations_core_trace');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/align_dilations_core_trace.m
+      md5: 17e149d78860215172708c99c4ee6a71
+      size: 2136
+    - path: Data/Linescans Data/core_trace
+      md5: a7f9745f340714d9463b3fc19cf1ada3.dir
+      size: 178361536
+      nfiles: 212
+    - path: Data/Linescans Data/dilation_timepoints
+      md5: 52be15248f10a712776c02685d528161.dir
+      size: 72400
+      nfiles: 15
+    outs:
+    - path: Data/Linescans Data/core_trace_dilation
+      md5: ccd25e392933eb2371b5d36f57e8875a.dir
+      size: 391080
+      nfiles: 15
+    - path: Data/Linescans Data/core_trace_dilation_tbl
+      md5: a81a2cb10718a8422af0bfb4f4da339b.dir
+      size: 5298264
+      nfiles: 15
+  plot_aligned_dilations_core_trace:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_core_trace');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_aligned_dilations_core_trace.m
+      md5: 15a376e1502a010afa5b90c0be4d5f5a
+      size: 4258
+    - path: Data/Linescans Data/core_trace_dilation
+      md5: ccd25e392933eb2371b5d36f57e8875a.dir
+      size: 391080
+      nfiles: 15
+    - path: Data/Linescans Data/core_trace_dilation_tbl
+      md5: a81a2cb10718a8422af0bfb4f4da339b.dir
+      size: 5298264
+      nfiles: 15
+    - path: Data/Linescans Data/diameter_dilation
+      md5: ccd25e392933eb2371b5d36f57e8875a.dir
+      size: 391080
+      nfiles: 15
+    - path: Data/Linescans Data/diameter_dilation_tbl
+      md5: 296daa7ba180ccbdea3527934bf06d49.dir
+      size: 15749568
+      nfiles: 15
+    outs:
+    - path: Plot/Linescan dilations vessel center avg
+      md5: ef5f6bfc1cfda4d40842844182bee75e.dir
+      size: 301997
+      nfiles: 1
+  Adjust Crosstalk GUI:
+    cmd: echo Adjusting crosstalk ready
+    deps:
+    - path: Data/Linescans Data/crosstalk_factor
+      md5: 9a41f49e12e519b8f36c359f96bfbbad.dir
+      size: 604168
+      nfiles: 362
+    - path: Data/Linescans Data/linescan_info
+      md5: 883c41562935b2e51a7b1082fa41e736.dir
+      size: 622432
+      nfiles: 293
+    - path: Data/Linescans Data/trial_type
+      md5: 3197aba10eb14c11f6c3ecd6bc837a51.dir
+      size: 54528
+      nfiles: 284
+    - path: Data/Linescans Data/vessels_green_raw
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red_raw
+      md5: c77665f50c1da88690c845a5cc897aa7.dir
+      size: 39071301760
+      nfiles: 288
+  Plot Linescan Pulsatility in Sleep Matlab:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_pulsatility_in_sleep');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_pulsatility_in_sleep.m
+      md5: 42be731b353c8c105f48e8a354a8a645
+      size: 3208
+    - path: Data/Linescans Data/pulsatility_in_sleep
+      md5: 585b36e1b4419c56d02bd50a346d6a58.dir
+      size: 1200952
+      nfiles: 138
+    outs:
+    - path: Plot/Linescan Pulsatility in Sleep Matlab
+      md5: 9020102243970de8d8d382f4008805e3.dir
+      size: 152524
+      nfiles: 4
+  Export clean diameter traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_diam_all_clean');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_diam_all_clean.m
+      md5: fc3470cf12db3b63ae9c9ef6e10e7992
+      size: 1940
+    - path: Data/Linescans Data/clean_episodes
+      md5: 4bd0898715a13f93936cd7cba676d240.dir
+      size: 291904
+      nfiles: 50
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri_baseline
+      md5: 6db88862b622331685ed7088893d31e6.dir
+      size: 163975632
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    outs:
+    - path: Plot/Linescan Diameter Clean Traces CSV
+      md5: 4a14f3ff44af9160ea5d6271076f9d69.dir
+      size: 388961197
+      nfiles: 50
+  export_vessel_images:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_images');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_vessel_images.m
+      md5: 08d723e6d2cfaf9b190740208d881129
+      size: 2697
+    - path: Data/Linescans Data/clean_episodes
+      md5: 4bd0898715a13f93936cd7cba676d240.dir
+      size: 291904
+      nfiles: 50
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+    outs:
+    - path: Plot/Linescan Vessel Images
+      md5: 763933cd1ea37514fb84eb862a912673.dir
+      size: 1002304677
+      nfiles: 12
+  plot_spectrogram_green:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_spectrogram_green');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/get_sleep_color_table.m
+      md5: 2c9127588694dd0ae4978d065b530106
+      size: 472
+    - path: Code/+eustoma/+processing/+linescans/plot_spectrogram_green.m
+      md5: 756853b9bbc74a3ba27e816b6c9c1237
+      size: 3681
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/trial_type
+      md5: 3197aba10eb14c11f6c3ecd6bc837a51.dir
+      size: 54528
+      nfiles: 284
+    - path: Data/Linescans Data/vessel_type
+      md5: b7d6eb8cd02ac6a970b3102ad07f1700.dir
+      size: 61592
+      nfiles: 305
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    outs:
+    - path: Plot/Linescan Diameter Spectrograms Green
+      md5: f4607d3b41e4ff663707e85b9378d774.dir
+      size: 55554491
+      nfiles: 120
+  plot_spectrogram_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_spectrogram_red');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/get_sleep_color_table.m
+      md5: 2c9127588694dd0ae4978d065b530106
+      size: 472
+    - path: Code/+eustoma/+processing/+linescans/plot_spectrogram_red.m
+      md5: 2c131af36785bf29a7e4750bf1210839
+      size: 3677
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/trial_type
+      md5: 3197aba10eb14c11f6c3ecd6bc837a51.dir
+      size: 54528
+      nfiles: 284
+    - path: Data/Linescans Data/vessel_type
+      md5: b7d6eb8cd02ac6a970b3102ad07f1700.dir
+      size: 61592
+      nfiles: 305
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+    outs:
+    - path: Plot/Linescan Diameter Spectrograms Red
+      md5: c6589cb03b518099c930651e37ed2bc2.dir
+      size: 91769222
+      nfiles: 181
+  plot_spectrogram_peri:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_spectrogram_peri');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/get_sleep_color_table.m
+      md5: 2c9127588694dd0ae4978d065b530106
+      size: 472
+    - path: Code/+eustoma/+processing/+linescans/plot_spectrogram_peri.m
+      md5: 3b37c6eb73442cb3dfd0ab371de47137
+      size: 4756
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri_baseline
+      md5: 6db88862b622331685ed7088893d31e6.dir
+      size: 163975632
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/trial_type
+      md5: 3197aba10eb14c11f6c3ecd6bc837a51.dir
+      size: 54528
+      nfiles: 284
+    - path: Data/Linescans Data/vessel_type
+      md5: b7d6eb8cd02ac6a970b3102ad07f1700.dir
+      size: 61592
+      nfiles: 305
+    - path: Data/Linescans Data/vessels_green
+      md5: 74813f19663a2d0b60e29b5c1587fd7c.dir
+      size: 30173664176
+      nfiles: 212
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+    outs:
+    - path: Plot/Linescan Diameter Spectrograms Peri
+      md5: ae9ce21359c1a90aea3d3b93e3d765e2.dir
+      size: 64228896
+      nfiles: 100
+  Diam Traces for Gudmund:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_diam_for_gudmund');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_diam_for_gudmund.m
+      md5: e05f27cb67c9ae42296b97b67c4da5d7
+      size: 4408
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Plot/Linescan Diameter Spectrograms Green
+      md5: f4607d3b41e4ff663707e85b9378d774.dir
+      size: 55554491
+      nfiles: 120
+    - path: Plot/Linescan Diameter Spectrograms Peri
+      md5: ae9ce21359c1a90aea3d3b93e3d765e2.dir
+      size: 64228896
+      nfiles: 100
+    - path: Plot/Linescan Diameter Spectrograms Red
+      md5: c6589cb03b518099c930651e37ed2bc2.dir
+      size: 91769222
+      nfiles: 181
+    outs:
+    - path: Plot/Linescan Diameter Traces for Gudmund
+      md5: d37c898e1706b247600fed7698dda808.dir
+      size: 1810996568
+      nfiles: 150
+  Mark Linescan Baseline:
+    cmd: echo Marking baseline ready
+    deps:
+    - path: Data/Linescans Data/baseline_episodes
+      md5: fc0c65b6bd0b2ae02407ee5929b1d776.dir
+      size: 721568
+      nfiles: 165
+    - path: Data/Linescans Data/diameter_red
+      md5: 989be05c55ee6ddfebf08f7ee2dd52e7.dir
+      size: 402701208
+      nfiles: 182
+    - path: Data/Linescans Data/linescan_info
+      md5: 883c41562935b2e51a7b1082fa41e736.dir
+      size: 622432
+      nfiles: 293
+    - path: Data/Linescans Data/path
+      md5: 7b4758456dcf46cbb50a364a14eea2bb.dir
+      size: 65632
+      nfiles: 293
+    - path: Data/Linescans Data/recrig
+      md5: f4f8ff59bb4f35218ec5e2021d575e45.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Data/trial_type
+      md5: 3197aba10eb14c11f6c3ecd6bc837a51.dir
+      size: 54528
+      nfiles: 284
+    - path: Data/Linescans Data/vessels_red
+      md5: c4366281d511181bcd42e7aa76f9ea57.dir
+      size: 39071301760
+      nfiles: 288
+    - path: Data/Linescans Recrig Data/ephys
+      md5: fe2e7bea9b99eda31a8d3a91c6c78a5a.dir
+      size: 2109473696
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/sleep_episodes
+      md5: 818d48a7f3734809aed60a19bab1db42.dir
+      size: 867720
+      nfiles: 187
+    - path: Data/Linescans Recrig Data/start_time
+      md5: 373517764441a0dd09c8cc85290a508d.dir
+      size: 398496
+      nfiles: 300
+  save_linescans_sleep_stats:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans_recrig.save_sleep_stats');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans_recrig/save_sleep_stats.m
+      md5: 72a6c87f205fcf636ac779f15e93ca80
+      size: 1937
+    - path: Data/Linescans Data/path
+      md5: 7b4758456dcf46cbb50a364a14eea2bb.dir
+      size: 65632
+      nfiles: 293
+    - path: Data/Linescans Recrig Data/linescan
+      md5: 1e525bc90d950d0c8bf7cd2cc65cc7c4.dir
+      size: 63616
+      nfiles: 284
+    - path: Data/Linescans Recrig Data/path
+      md5: 64c9b81f5e8c822d4a03a532ae3654bb.dir
+      size: 73072
+      nfiles: 300
+    - path: Data/Linescans Recrig Data/sleep_episodes
+      md5: 818d48a7f3734809aed60a19bab1db42.dir
+      size: 867720
+      nfiles: 187
+    outs:
+    - path: Plot/Linescan Sleep Data
+      md5: ade89adbf87bffe51daf622d018c9305.dir
+      size: 269770
+      nfiles: 3
+  export_vessel_wall_traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_wall_clean');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_vessel_wall_clean.m
+      md5: c8c6cc0b5ca7fdddcc841fe9e2fcbbe2
+      size: 1498
+    - path: Data/Linescans Data/clean_episodes
+      md5: 4bd0898715a13f93936cd7cba676d240.dir
+      size: 291904
+      nfiles: 50
+    - path: Data/Linescans Data/vessel_wall
+      md5: 76eb859423640ff7bde7b79b6c7ca6e1.dir
+      size: 408977064
+      nfiles: 100
+    outs:
+    - path: Plot/Linescan Vessel Wall Clean Traces CSV
+      md5: dc7c0c2dc3ec6d7d3b72befae85a8ed3.dir
+      size: 473270963
+      nfiles: 50
+  Plot ECoG to dilations avg:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_aligned_dilations_eeg_avg');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_aligned_dilations_eeg_avg.m
+      md5: c7d438762886a493fac4ea882e7fe201
+      size: 4875
+    - path: Data/Linescans Data/diameter_dilation
+      md5: ccd25e392933eb2371b5d36f57e8875a.dir
+      size: 391080
+      nfiles: 15
+    - path: Data/Linescans Data/diameter_dilation_tbl
+      md5: 296daa7ba180ccbdea3527934bf06d49.dir
+      size: 15749568
+      nfiles: 15
+    - path: Data/Linescans Data/eeg_dilation
+      md5: 711817cac8f324121857a52822a38b66.dir
+      size: 2480400
+      nfiles: 15
+    - path: Data/Linescans Data/eeg_dilation_tbl
+      md5: ee0a7857d011ee931b9e6a2964ddf03b.dir
+      size: 4144786464
+      nfiles: 15
+    outs:
+    - path: Plot/Linescan dilations ECoG avg
+      md5: 62dfa212d132fa9ccdffa9372fe6a1f0.dir
+      size: 22741047
+      nfiles: 4
+  Plot Baseline Diameter:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.plot_diameter_in_baseline');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/plot_diameter_in_baseline.m
+      md5: 04e2fb68741ed6446940fd116e3c954b
+      size: 4105
+    - path: Data/Linescans Data/diameter_in_episodes
+      md5: 471c337e4fdef126c115cf81ae832718.dir
+      size: 5354816
+      nfiles: 199
+    outs:
+    - path: Plot/Linescan Diameter in Episodes
+      md5: 1a79c9d8d8280bbb2b494476f0793925.dir
+      size: 340189
+      nfiles: 5
+  Export diameter traces:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_diam_all');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_diam_all.m
+      md5: e4b35391480e245039c15102809a0722
+      size: 1931
+    - path: Data/Linescans Data/diameter_green_baseline
+      md5: 9e5a7f44f582086c87677ad2f7c32d0e.dir
+      size: 298576168
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_peri_baseline
+      md5: 6db88862b622331685ed7088893d31e6.dir
+      size: 163975632
+      nfiles: 100
+    - path: Data/Linescans Data/diameter_red_baseline
+      md5: 9478873a638920c63c8d81068323fb15.dir
+      size: 402724504
+      nfiles: 182
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    outs:
+    - path: Plot/Linescan Diameter Traces CSV
+      md5: 7c19f42340e35c9b14c3aed9b71e2dea.dir
+      size: 1140118728
+      nfiles: 199
+  Save Vessel Types:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.save_vessel_type');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/save_vessel_type.m
+      md5: 11fd4eccfb8cdf0c788e51015db5bcc2
+      size: 485
+    - path: Data/Linescans Data/trial_id
+      md5: 00d2f23fd294d3ebe59cfc9841fa49d3.dir
+      size: 855376
+      nfiles: 293
+    outs:
+    - path: Plot/Linescan Tables/Vessel Types.csv
+      md5: f50c6f0830d8a689bd36a93ab4146bc7
+      size: 10255
+  calc_vessel_wall_traces_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.calc_vessel_wall_traces_red');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/calc_vessel_wall_traces_red.m
+      md5: f1a42e0decb02d3d06a3e016f6c914e7
+      size: 2218
+    - path: Data/Linescans Data/diameter_green
+      md5: 0a78beb19cf78a0dd449d65a130541c6.dir
+      size: 298560808
+      nfiles: 120
+    - path: Data/Linescans Data/diameter_red
+      md5: 989be05c55ee6ddfebf08f7ee2dd52e7.dir
+      size: 402701208
+      nfiles: 182
+    - path: Data/Linescans Data/ignored_episodes_green
+      md5: b724b7aba84947c5e952e0e0bb197e05.dir
+      size: 279232
+      nfiles: 73
+    - path: Data/Linescans Data/ignored_episodes_red
+      md5: fa7bdbb11c132fa978dc9f60b9c73f9f.dir
+      size: 386088
+      nfiles: 102
+    outs:
+    - path: Data/Linescans Data/vessel_wall_red
+      md5: 6579d54e36549d84fbd6627760d60408.dir
+      size: 157064976
+      nfiles: 82
+  export_vessel_wall_red:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_wall_red');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_vessel_wall_red.m
+      md5: 880e4372f5cdce0d26a8d45c3ae6ed0b
+      size: 2342
+    - path: Data/Linescans Data/awakening_episodes
+      md5: 81ef60fb79ee508ea89bf1917b742a93.dir
+      size: 169328
+      nfiles: 38
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/vessel_wall_red
+      md5: 6579d54e36549d84fbd6627760d60408.dir
+      size: 157064976
+      nfiles: 82
+    outs:
+    - path: Plot/Lumen Vessel Wall CSV
+      md5: ae8f717606fd015e2af5f3f9ea67bed5.dir
+      size: 351740440
+      nfiles: 79
+    - path: Plot/Lumen Vessel Wall CSV Awakening
+      md5: cd6f6bad5e9599e96502d06ea457f7dc.dir
+      size: 103513123
+      nfiles: 18
+  export_vessel_wall:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_wall');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_vessel_wall.m
+      md5: 232b1178eb08153dda3d71c6fb8ea3c1
+      size: 2625
+    - path: Data/Linescans Data/awakening_episodes
+      md5: 81ef60fb79ee508ea89bf1917b742a93.dir
+      size: 169328
+      nfiles: 38
+    - path: Data/Linescans Data/clean_episodes
+      md5: 4bd0898715a13f93936cd7cba676d240.dir
+      size: 291904
+      nfiles: 50
+    - path: Data/Linescans Data/episodes
+      md5: cdba0c31b9a2bd5713c0e3dcaf4086a0.dir
+      size: 2140536
+      nfiles: 249
+    - path: Data/Linescans Data/vessel_wall
+      md5: 76eb859423640ff7bde7b79b6c7ca6e1.dir
+      size: 408977064
+      nfiles: 100
+    outs:
+    - path: Plot/Vessel Wall CSV
+      md5: e506839622a9b3a9af6dcbfd3992a883.dir
+      size: 902764670
+      nfiles: 100
+    - path: Plot/Vessel Wall CSV Clean + Awakening
+      md5: d2f57b8fa33e4b17d9442776d1c07a31.dir
+      size: 501942503
+      nfiles: 52
+  export_vessel_wall_subset_for_simulations:
+    cmd: matlab -nodisplay -nosplash -nodesktop -r "run_script('eustoma.processing.linescans.export_vessel_wall_subset_for_simulations');"
+    deps:
+    - path: Code/+eustoma/+processing/+linescans/export_vessel_wall_subset_for_simulations.m
+      md5: 860697bc06da231dd2ea105bdbee31ba
+      size: 1353
+    - path: Plot/Lumen Vessel Wall CSV Awakening
+      md5: cd6f6bad5e9599e96502d06ea457f7dc.dir
+      size: 103513123
+      nfiles: 18
+    - path: Plot/Vessel Wall CSV Clean + Awakening
+      md5: d2f57b8fa33e4b17d9442776d1c07a31.dir
+      size: 501942503
+      nfiles: 52
+    outs:
+    - path: Plot/Vessel Wall CSV used in simulations
+      md5: 6242dbcd55f07f7fc7a19f063231f2eb.dir
+      size: 592010417
+      nfiles: 68

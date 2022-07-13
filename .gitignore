@@ -1,0 +1,16 @@
+*dl_internal_changelog*
+.Rproj.user
+.Rhistory
+.RData
+.DS_Store
+Data/Sleep Project TSeries
+Data/Sleep Project Recrig
+Data/Sleep Project Experiments
+Data/Linescans
+Data/Linescans Recrig
+Data/Endfeet TSeries
+Data/Endfeet Recrig
+Data/Endfeet Experiments
+Data/Microbead TSeries
+Python Code/venv
+Python Code/.idea

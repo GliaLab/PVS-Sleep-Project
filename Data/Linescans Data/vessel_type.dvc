@@ -1,0 +1,5 @@
+outs:
+- md5: b7d6eb8cd02ac6a970b3102ad07f1700.dir
+  size: 61592
+  nfiles: 305
+  path: vessel_type

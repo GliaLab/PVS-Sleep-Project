@@ -1,0 +1,4 @@
+[core]
+    remote = gandalf
+['remote "gandalf"']
+    url = /Volumes/Gandalf/Neoendfeet linescans cache

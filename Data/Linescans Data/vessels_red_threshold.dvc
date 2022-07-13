@@ -1,0 +1,5 @@
+outs:
+- md5: 89f1cde45af972b3b1bc3dd7d8303489.dir
+  size: 701792
+  nfiles: 182
+  path: vessels_red_threshold
